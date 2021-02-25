@@ -2,7 +2,7 @@ kops create cluster \
 --name=kops.samdevopsinuse.ml \
 --state=s3://kops.samdevopsinuse.ml \
 --authorization RBAC \
---zones="eu-west-1" \
+--zones=eu-west-1b \
 --node-count=2 \
 --master-count=1 \
 --node-size=t2.micro \

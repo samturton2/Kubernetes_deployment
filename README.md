@@ -30,7 +30,7 @@ kops create cluster \
 # Role based authorisation
 --authorization RBAC \
 # Define data centre
---zones=eu-west-1a \
+--zones=eu-west-1b \
 # Define number of nodes we will want
 --node-count=2 \
 # How mant Master nodes for this k8 cluster
