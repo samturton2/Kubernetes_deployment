@@ -40,7 +40,7 @@ kops create cluster \
 --master-size=t2.micro \
 # Hosted zone set up with Freenom
 # Purchased sam.devopsinuse.ml for free
---dns-zone=kops.sam.devopsinuse.ml \
+--dns-zone=kops.samdevopsinuse.ml \
 # Make name of output folder where
 # kops will generate terraform code
 --out=samdevopsinuse_terraform \
