@@ -49,4 +49,4 @@ kops create cluster \
 # Need to create ssh keypair for k8 clusters
 --ssh-public-key=~/.ssh/samdevopsinuse.pub
 ```
-- This can be ran in the terminal with `bash kops.sh`
+- This can be ran in the terminal after `aws configure` is ran, with `bash kops.sh`
