@@ -20,3 +20,33 @@ AWS_SECRET_KEY= "<your aws secret key"
 - We next need to purchase a domain name, (I chose a free one from https://my.freenom.com/) namely samdevopsinuse.ml.
 - This needs to be created as a publically hosted zone in AWS Route53. The custom name servers shown in aws need to be entered into the domain name provider aswell.
 ![](img/route53.png)
+- `kops.sh` file was created to create the cluster.
+```bash
+kops create cluster \
+# The name of our cluster
+--name=kops.samdevopsinuse.ml \
+# name of the s3 bucket made in AWS (kops storage)
+--state=s3://kops.samdevopsinuse.ml \
+# Role based authorisation
+--authorization RBAC \
+# Define data centre
+--zones=eu-west-1a \
+# Define number of nodes we will want
+--node-count=2 \
+# How mant Master nodes for this k8 cluster
+--master-count=1 \
+# ec2 instances power
+--node-size=t2.micro \
+--master-size=t2.micro \
+# Hosted zone set up with Freenom
+# Purchased sam.devopsinuse.ml for free
+--dns-zone=kops.sam.devopsinuse.ml \
+# Make name of output folder where
+# kops will generate terraform code
+--out=samdevopsinuse_terraform \
+# Target is "terraform" code
+--target=terraform \
+# Need to create ssh keypair for k8 clusters
+--ssh-public-key=~/.ssh/samdevopsinuse.pub
+```
+- This can be ran in the terminal with `bash kops.sh`
