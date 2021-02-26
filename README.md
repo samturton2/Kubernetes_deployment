@@ -11,8 +11,8 @@
 - The `terraform.code.tf` file was created to specify the creation of a simple ec2 instance in our AWS specified region, and outputs the private ip of the created EC2 instance into a text file.
 - a `terraform.tfvars` file was created and ignored from git which heald the following
 ```tfvars
-AWS_ACCESS_KEY= "<your aws access key"
-AWS_SECRET_KEY= "<your aws secret key"
+AWS_ACCESS_KEY= "<your aws access key>"
+AWS_SECRET_KEY= "<your aws secret key>"
 ```
 
 ## Kops
