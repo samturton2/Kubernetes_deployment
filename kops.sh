@@ -1,8 +1,8 @@
 kops create cluster \
---name=kops.samdevopsinuse.ml \
---state=s3://kops.samdevopsinuse.ml \
+--name kops.samdevopsinuse.ml \
+--zones us-west-2a \
+--state s3://kops.samdevopsinuse.ml \
 --authorization RBAC \
---zones=eu-west-1b \
 --node-count=2 \
 --master-count=1 \
 --node-size=t2.micro \
@@ -10,4 +10,5 @@ kops create cluster \
 --dns-zone=kops.samdevopsinuse.ml \
 --out=samdevopsinuse_terraform \
 --target=terraform \
---ssh-public-key=~/.ssh/samdevopsinuse.pub
+--ssh-public-key=~/.ssh/samdevopsinuse.pub \
+--yes
