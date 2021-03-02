@@ -22,6 +22,9 @@ AWS_SECRET_KEY= "<your aws secret key>"
 ![](img/route53.png)
 - `kops.sh` file was created to create the cluster.
 ```bash
+export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
+export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
+
 kops create cluster \
 # The name of our cluster
 --name=kops.samdevopsinuse.ml \
@@ -50,3 +53,4 @@ kops create cluster \
 --ssh-public-key=~/.ssh/samdevopsinuse.pub
 ```
 - This can be ran in the terminal after `aws configure` is ran, with `bash kops.sh`
+
