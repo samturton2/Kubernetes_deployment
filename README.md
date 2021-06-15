@@ -17,7 +17,7 @@ AWS_SECRET_KEY= "<your aws secret key>"
 
 ## Kops
 - To create the kubernetes cluster, we first need to create an S3 bucket to store the kubernetes congiguration in.
-- We next need to purchase a domain name, (I chose a free one from https://my.freenom.com/) namely samdevopsinuse.ml.
+- We next need to purchase a domain name, (previously was using samdevopsinuse.ml) (update: kops.sh file now using bhouk.com domain)
 - This needs to be created as a publically hosted zone in AWS Route53. The custom name servers shown in aws need to be entered into the domain name provider aswell.
 ![](img/route53.png)
 - `kops.sh` file was created to create the cluster.
@@ -54,3 +54,5 @@ kops create cluster \
 ```
 - This can be ran in the terminal after `aws configure` is ran, with `bash kops.sh`
 
+- This will take a second to run, but will produce a folder in your directory.
+![](img/kops_folder.png)

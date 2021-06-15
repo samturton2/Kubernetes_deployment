@@ -10,7 +10,7 @@ kops create cluster \
 --master-count=1 \
 --node-size=t2.micro \
 --master-size=t2.micro \
---dns-zone=kops.samdevopsinuse.ml \
+--dns-zone=kops.bhouk.com \
 --out=samdevopsinuse_terraform \
 --target=terraform \
 --ssh-public-key=~/.ssh/samdevopsinuse.pub \
