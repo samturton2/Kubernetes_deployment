@@ -1,2 +1,4 @@
 /.terraform*
 /terraform.tf*
+/samdevopsinuse_terraform/.terraform*
+/samdevopsinuse_terraform/terraform.tf*

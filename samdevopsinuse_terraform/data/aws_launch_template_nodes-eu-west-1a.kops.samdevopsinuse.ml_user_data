@@ -8,7 +8,7 @@ NODEUP_HASH_AMD64=b491a8be9c2951d112f554fb58bb72e54d62181cf20d79057648fb3831bca8
 NODEUP_URL_ARM64=https://artifacts.k8s.io/binaries/kops/1.19.0/linux/arm64/nodeup,https://github.com/kubernetes/kops/releases/download/v1.19.0/nodeup-linux-arm64,https://kubeupv2.s3.amazonaws.com/kops/1.19.0/linux/arm64/nodeup
 NODEUP_HASH_ARM64=6d094215ca54815b78aa175e039cd689c33f6ae909afccee66714ee9767e5a0a
 
-export AWS_REGION=us-west-2
+export AWS_REGION=eu-west-1
 
 
 
@@ -196,7 +196,7 @@ Assets:
   - 8350eaa0c0965bb8eb9d45a014f4b6728c985715f56466077dfe6feb271d9518@https://download.docker.com/linux/static/stable/aarch64/docker-19.03.14.tgz
 ClusterName: kops.samdevopsinuse.ml
 ConfigBase: s3://kops.samdevopsinuse.ml/kops.samdevopsinuse.ml
-InstanceGroupName: nodes-us-west-2a
+InstanceGroupName: nodes-eu-west-1a
 InstanceGroupRole: Node
 KubeletConfig:
   anonymousAuth: false
@@ -212,7 +212,7 @@ KubeletConfig:
   networkPluginMTU: 9001
   networkPluginName: kubenet
   nodeLabels:
-    kops.k8s.io/instancegroup: nodes-us-west-2a
+    kops.k8s.io/instancegroup: nodes-eu-west-1a
     kubernetes.io/role: node
     node-role.kubernetes.io/node: ""
   nonMasqueradeCIDR: 100.64.0.0/10

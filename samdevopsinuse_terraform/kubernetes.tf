@@ -1,17 +1,17 @@
 locals {
   cluster_name                 = "kops.samdevopsinuse.ml"
-  master_autoscaling_group_ids = [aws_autoscaling_group.master-us-west-2a-masters-kops-samdevopsinuse-ml.id]
+  master_autoscaling_group_ids = [aws_autoscaling_group.master-eu-west-1a-masters-kops-samdevopsinuse-ml.id]
   master_security_group_ids    = [aws_security_group.masters-kops-samdevopsinuse-ml.id]
   masters_role_arn             = aws_iam_role.masters-kops-samdevopsinuse-ml.arn
   masters_role_name            = aws_iam_role.masters-kops-samdevopsinuse-ml.name
-  node_autoscaling_group_ids   = [aws_autoscaling_group.nodes-us-west-2a-kops-samdevopsinuse-ml.id]
+  node_autoscaling_group_ids   = [aws_autoscaling_group.nodes-eu-west-1a-kops-samdevopsinuse-ml.id]
   node_security_group_ids      = [aws_security_group.nodes-kops-samdevopsinuse-ml.id]
-  node_subnet_ids              = [aws_subnet.us-west-2a-kops-samdevopsinuse-ml.id]
+  node_subnet_ids              = [aws_subnet.eu-west-1a-kops-samdevopsinuse-ml.id]
   nodes_role_arn               = aws_iam_role.nodes-kops-samdevopsinuse-ml.arn
   nodes_role_name              = aws_iam_role.nodes-kops-samdevopsinuse-ml.name
-  region                       = "us-west-2"
+  region                       = "eu-west-1"
   route_table_public_id        = aws_route_table.kops-samdevopsinuse-ml.id
-  subnet_us-west-2a_id         = aws_subnet.us-west-2a-kops-samdevopsinuse-ml.id
+  subnet_eu-west-1a_id         = aws_subnet.eu-west-1a-kops-samdevopsinuse-ml.id
   vpc_cidr_block               = aws_vpc.kops-samdevopsinuse-ml.cidr_block
   vpc_id                       = aws_vpc.kops-samdevopsinuse-ml.id
 }
@@ -21,7 +21,7 @@ output "cluster_name" {
 }
 
 output "master_autoscaling_group_ids" {
-  value = [aws_autoscaling_group.master-us-west-2a-masters-kops-samdevopsinuse-ml.id]
+  value = [aws_autoscaling_group.master-eu-west-1a-masters-kops-samdevopsinuse-ml.id]
 }
 
 output "master_security_group_ids" {
@@ -37,7 +37,7 @@ output "masters_role_name" {
 }
 
 output "node_autoscaling_group_ids" {
-  value = [aws_autoscaling_group.nodes-us-west-2a-kops-samdevopsinuse-ml.id]
+  value = [aws_autoscaling_group.nodes-eu-west-1a-kops-samdevopsinuse-ml.id]
 }
 
 output "node_security_group_ids" {
@@ -45,7 +45,7 @@ output "node_security_group_ids" {
 }
 
 output "node_subnet_ids" {
-  value = [aws_subnet.us-west-2a-kops-samdevopsinuse-ml.id]
+  value = [aws_subnet.eu-west-1a-kops-samdevopsinuse-ml.id]
 }
 
 output "nodes_role_arn" {
@@ -57,15 +57,15 @@ output "nodes_role_name" {
 }
 
 output "region" {
-  value = "us-west-2"
+  value = "eu-west-1"
 }
 
 output "route_table_public_id" {
   value = aws_route_table.kops-samdevopsinuse-ml.id
 }
 
-output "subnet_us-west-2a_id" {
-  value = aws_subnet.us-west-2a-kops-samdevopsinuse-ml.id
+output "subnet_eu-west-1a_id" {
+  value = aws_subnet.eu-west-1a-kops-samdevopsinuse-ml.id
 }
 
 output "vpc_cidr_block" {
@@ -76,20 +76,25 @@ output "vpc_id" {
   value = aws_vpc.kops-samdevopsinuse-ml.id
 }
 
+variable "AWS_ACCESS_KEY" {}
+variable "AWS_SECRET_KEY" {}
+
 provider "aws" {
-  region = "us-west-2"
+  access_key = var.AWS_ACCESS_KEY
+  secret_key = var.AWS_SECRET_KEY
+  region = "eu-west-1"
 }
 
-resource "aws_autoscaling_group" "master-us-west-2a-masters-kops-samdevopsinuse-ml" {
+resource "aws_autoscaling_group" "master-eu-west-1a-masters-kops-samdevopsinuse-ml" {
   enabled_metrics = ["GroupDesiredCapacity", "GroupInServiceInstances", "GroupMaxSize", "GroupMinSize", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
   launch_template {
-    id      = aws_launch_template.master-us-west-2a-masters-kops-samdevopsinuse-ml.id
-    version = aws_launch_template.master-us-west-2a-masters-kops-samdevopsinuse-ml.latest_version
+    id      = aws_launch_template.master-eu-west-1a-masters-kops-samdevopsinuse-ml.id
+    version = aws_launch_template.master-eu-west-1a-masters-kops-samdevopsinuse-ml.latest_version
   }
   max_size            = 1
   metrics_granularity = "1Minute"
   min_size            = 1
-  name                = "master-us-west-2a.masters.kops.samdevopsinuse.ml"
+  name                = "master-eu-west-1a.masters.kops.samdevopsinuse.ml"
   tag {
     key                 = "KubernetesCluster"
     propagate_at_launch = true
@@ -98,12 +103,12 @@ resource "aws_autoscaling_group" "master-us-west-2a-masters-kops-samdevopsinuse-
   tag {
     key                 = "Name"
     propagate_at_launch = true
-    value               = "master-us-west-2a.masters.kops.samdevopsinuse.ml"
+    value               = "master-eu-west-1a.masters.kops.samdevopsinuse.ml"
   }
   tag {
     key                 = "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
     propagate_at_launch = true
-    value               = "master-us-west-2a"
+    value               = "master-eu-west-1a"
   }
   tag {
     key                 = "k8s.io/cluster-autoscaler/node-template/label/kubernetes.io/role"
@@ -123,26 +128,26 @@ resource "aws_autoscaling_group" "master-us-west-2a-masters-kops-samdevopsinuse-
   tag {
     key                 = "kops.k8s.io/instancegroup"
     propagate_at_launch = true
-    value               = "master-us-west-2a"
+    value               = "master-eu-west-1a"
   }
   tag {
     key                 = "kubernetes.io/cluster/kops.samdevopsinuse.ml"
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = [aws_subnet.us-west-2a-kops-samdevopsinuse-ml.id]
+  vpc_zone_identifier = [aws_subnet.eu-west-1a-kops-samdevopsinuse-ml.id]
 }
 
-resource "aws_autoscaling_group" "nodes-us-west-2a-kops-samdevopsinuse-ml" {
+resource "aws_autoscaling_group" "nodes-eu-west-1a-kops-samdevopsinuse-ml" {
   enabled_metrics = ["GroupDesiredCapacity", "GroupInServiceInstances", "GroupMaxSize", "GroupMinSize", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
   launch_template {
-    id      = aws_launch_template.nodes-us-west-2a-kops-samdevopsinuse-ml.id
-    version = aws_launch_template.nodes-us-west-2a-kops-samdevopsinuse-ml.latest_version
+    id      = aws_launch_template.nodes-eu-west-1a-kops-samdevopsinuse-ml.id
+    version = aws_launch_template.nodes-eu-west-1a-kops-samdevopsinuse-ml.latest_version
   }
   max_size            = 2
   metrics_granularity = "1Minute"
   min_size            = 2
-  name                = "nodes-us-west-2a.kops.samdevopsinuse.ml"
+  name                = "nodes-eu-west-1a.kops.samdevopsinuse.ml"
   tag {
     key                 = "KubernetesCluster"
     propagate_at_launch = true
@@ -151,12 +156,12 @@ resource "aws_autoscaling_group" "nodes-us-west-2a-kops-samdevopsinuse-ml" {
   tag {
     key                 = "Name"
     propagate_at_launch = true
-    value               = "nodes-us-west-2a.kops.samdevopsinuse.ml"
+    value               = "nodes-eu-west-1a.kops.samdevopsinuse.ml"
   }
   tag {
     key                 = "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
     propagate_at_launch = true
-    value               = "nodes-us-west-2a"
+    value               = "nodes-eu-west-1a"
   }
   tag {
     key                 = "k8s.io/cluster-autoscaler/node-template/label/kubernetes.io/role"
@@ -176,18 +181,18 @@ resource "aws_autoscaling_group" "nodes-us-west-2a-kops-samdevopsinuse-ml" {
   tag {
     key                 = "kops.k8s.io/instancegroup"
     propagate_at_launch = true
-    value               = "nodes-us-west-2a"
+    value               = "nodes-eu-west-1a"
   }
   tag {
     key                 = "kubernetes.io/cluster/kops.samdevopsinuse.ml"
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = [aws_subnet.us-west-2a-kops-samdevopsinuse-ml.id]
+  vpc_zone_identifier = [aws_subnet.eu-west-1a-kops-samdevopsinuse-ml.id]
 }
 
 resource "aws_ebs_volume" "a-etcd-events-kops-samdevopsinuse-ml" {
-  availability_zone = "us-west-2a"
+  availability_zone = "eu-west-1a"
   encrypted         = false
   size              = 20
   tags = {
@@ -201,7 +206,7 @@ resource "aws_ebs_volume" "a-etcd-events-kops-samdevopsinuse-ml" {
 }
 
 resource "aws_ebs_volume" "a-etcd-main-kops-samdevopsinuse-ml" {
-  availability_zone = "us-west-2a"
+  availability_zone = "eu-west-1a"
   encrypted         = false
   size              = 20
   tags = {
@@ -265,7 +270,7 @@ resource "aws_key_pair" "kubernetes-kops-samdevopsinuse-ml-65f70f6051f5091cb36db
   }
 }
 
-resource "aws_launch_template" "master-us-west-2a-masters-kops-samdevopsinuse-ml" {
+resource "aws_launch_template" "master-eu-west-1a-masters-kops-samdevopsinuse-ml" {
   block_device_mappings {
     device_name = "/dev/sda1"
     ebs {
@@ -278,7 +283,7 @@ resource "aws_launch_template" "master-us-west-2a-masters-kops-samdevopsinuse-ml
   iam_instance_profile {
     name = aws_iam_instance_profile.masters-kops-samdevopsinuse-ml.id
   }
-  image_id      = "ami-0554443e7f55d3eeb"
+  image_id      = "ami-09c60c18b634a5e00"
   instance_type = "t2.micro"
   key_name      = aws_key_pair.kubernetes-kops-samdevopsinuse-ml-65f70f6051f5091cb36db4e039fbee0b.id
   lifecycle {
@@ -289,7 +294,7 @@ resource "aws_launch_template" "master-us-west-2a-masters-kops-samdevopsinuse-ml
     http_put_response_hop_limit = 1
     http_tokens                 = "optional"
   }
-  name = "master-us-west-2a.masters.kops.samdevopsinuse.ml"
+  name = "master-eu-west-1a.masters.kops.samdevopsinuse.ml"
   network_interfaces {
     associate_public_ip_address = true
     delete_on_termination       = true
@@ -299,12 +304,12 @@ resource "aws_launch_template" "master-us-west-2a-masters-kops-samdevopsinuse-ml
     resource_type = "instance"
     tags = {
       "KubernetesCluster"                                                            = "kops.samdevopsinuse.ml"
-      "Name"                                                                         = "master-us-west-2a.masters.kops.samdevopsinuse.ml"
-      "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"      = "master-us-west-2a"
+      "Name"                                                                         = "master-eu-west-1a.masters.kops.samdevopsinuse.ml"
+      "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"      = "master-eu-west-1a"
       "k8s.io/cluster-autoscaler/node-template/label/kubernetes.io/role"             = "master"
       "k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/master" = ""
       "k8s.io/role/master"                                                           = "1"
-      "kops.k8s.io/instancegroup"                                                    = "master-us-west-2a"
+      "kops.k8s.io/instancegroup"                                                    = "master-eu-west-1a"
       "kubernetes.io/cluster/kops.samdevopsinuse.ml"                                 = "owned"
     }
   }
@@ -312,29 +317,29 @@ resource "aws_launch_template" "master-us-west-2a-masters-kops-samdevopsinuse-ml
     resource_type = "volume"
     tags = {
       "KubernetesCluster"                                                            = "kops.samdevopsinuse.ml"
-      "Name"                                                                         = "master-us-west-2a.masters.kops.samdevopsinuse.ml"
-      "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"      = "master-us-west-2a"
+      "Name"                                                                         = "master-eu-west-1a.masters.kops.samdevopsinuse.ml"
+      "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"      = "master-eu-west-1a"
       "k8s.io/cluster-autoscaler/node-template/label/kubernetes.io/role"             = "master"
       "k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/master" = ""
       "k8s.io/role/master"                                                           = "1"
-      "kops.k8s.io/instancegroup"                                                    = "master-us-west-2a"
+      "kops.k8s.io/instancegroup"                                                    = "master-eu-west-1a"
       "kubernetes.io/cluster/kops.samdevopsinuse.ml"                                 = "owned"
     }
   }
   tags = {
     "KubernetesCluster"                                                            = "kops.samdevopsinuse.ml"
-    "Name"                                                                         = "master-us-west-2a.masters.kops.samdevopsinuse.ml"
-    "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"      = "master-us-west-2a"
+    "Name"                                                                         = "master-eu-west-1a.masters.kops.samdevopsinuse.ml"
+    "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"      = "master-eu-west-1a"
     "k8s.io/cluster-autoscaler/node-template/label/kubernetes.io/role"             = "master"
     "k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/master" = ""
     "k8s.io/role/master"                                                           = "1"
-    "kops.k8s.io/instancegroup"                                                    = "master-us-west-2a"
+    "kops.k8s.io/instancegroup"                                                    = "master-eu-west-1a"
     "kubernetes.io/cluster/kops.samdevopsinuse.ml"                                 = "owned"
   }
-  user_data = filebase64("${path.module}/data/aws_launch_template_master-us-west-2a.masters.kops.samdevopsinuse.ml_user_data")
+  user_data = filebase64("${path.module}/data/aws_launch_template_master-eu-west-1a.masters.kops.samdevopsinuse.ml_user_data")
 }
 
-resource "aws_launch_template" "nodes-us-west-2a-kops-samdevopsinuse-ml" {
+resource "aws_launch_template" "nodes-eu-west-1a-kops-samdevopsinuse-ml" {
   block_device_mappings {
     device_name = "/dev/sda1"
     ebs {
@@ -347,7 +352,7 @@ resource "aws_launch_template" "nodes-us-west-2a-kops-samdevopsinuse-ml" {
   iam_instance_profile {
     name = aws_iam_instance_profile.nodes-kops-samdevopsinuse-ml.id
   }
-  image_id      = "ami-0554443e7f55d3eeb"
+  image_id      = "ami-09c60c18b634a5e00"
   instance_type = "t2.micro"
   key_name      = aws_key_pair.kubernetes-kops-samdevopsinuse-ml-65f70f6051f5091cb36db4e039fbee0b.id
   lifecycle {
@@ -358,7 +363,7 @@ resource "aws_launch_template" "nodes-us-west-2a-kops-samdevopsinuse-ml" {
     http_put_response_hop_limit = 1
     http_tokens                 = "optional"
   }
-  name = "nodes-us-west-2a.kops.samdevopsinuse.ml"
+  name = "nodes-eu-west-1a.kops.samdevopsinuse.ml"
   network_interfaces {
     associate_public_ip_address = true
     delete_on_termination       = true
@@ -368,12 +373,12 @@ resource "aws_launch_template" "nodes-us-west-2a-kops-samdevopsinuse-ml" {
     resource_type = "instance"
     tags = {
       "KubernetesCluster"                                                          = "kops.samdevopsinuse.ml"
-      "Name"                                                                       = "nodes-us-west-2a.kops.samdevopsinuse.ml"
-      "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"    = "nodes-us-west-2a"
+      "Name"                                                                       = "nodes-eu-west-1a.kops.samdevopsinuse.ml"
+      "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"    = "nodes-eu-west-1a"
       "k8s.io/cluster-autoscaler/node-template/label/kubernetes.io/role"           = "node"
       "k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/node" = ""
       "k8s.io/role/node"                                                           = "1"
-      "kops.k8s.io/instancegroup"                                                  = "nodes-us-west-2a"
+      "kops.k8s.io/instancegroup"                                                  = "nodes-eu-west-1a"
       "kubernetes.io/cluster/kops.samdevopsinuse.ml"                               = "owned"
     }
   }
@@ -381,31 +386,31 @@ resource "aws_launch_template" "nodes-us-west-2a-kops-samdevopsinuse-ml" {
     resource_type = "volume"
     tags = {
       "KubernetesCluster"                                                          = "kops.samdevopsinuse.ml"
-      "Name"                                                                       = "nodes-us-west-2a.kops.samdevopsinuse.ml"
-      "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"    = "nodes-us-west-2a"
+      "Name"                                                                       = "nodes-eu-west-1a.kops.samdevopsinuse.ml"
+      "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"    = "nodes-eu-west-1a"
       "k8s.io/cluster-autoscaler/node-template/label/kubernetes.io/role"           = "node"
       "k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/node" = ""
       "k8s.io/role/node"                                                           = "1"
-      "kops.k8s.io/instancegroup"                                                  = "nodes-us-west-2a"
+      "kops.k8s.io/instancegroup"                                                  = "nodes-eu-west-1a"
       "kubernetes.io/cluster/kops.samdevopsinuse.ml"                               = "owned"
     }
   }
   tags = {
     "KubernetesCluster"                                                          = "kops.samdevopsinuse.ml"
-    "Name"                                                                       = "nodes-us-west-2a.kops.samdevopsinuse.ml"
-    "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"    = "nodes-us-west-2a"
+    "Name"                                                                       = "nodes-eu-west-1a.kops.samdevopsinuse.ml"
+    "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"    = "nodes-eu-west-1a"
     "k8s.io/cluster-autoscaler/node-template/label/kubernetes.io/role"           = "node"
     "k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/node" = ""
     "k8s.io/role/node"                                                           = "1"
-    "kops.k8s.io/instancegroup"                                                  = "nodes-us-west-2a"
+    "kops.k8s.io/instancegroup"                                                  = "nodes-eu-west-1a"
     "kubernetes.io/cluster/kops.samdevopsinuse.ml"                               = "owned"
   }
-  user_data = filebase64("${path.module}/data/aws_launch_template_nodes-us-west-2a.kops.samdevopsinuse.ml_user_data")
+  user_data = filebase64("${path.module}/data/aws_launch_template_nodes-eu-west-1a.kops.samdevopsinuse.ml_user_data")
 }
 
-resource "aws_route_table_association" "us-west-2a-kops-samdevopsinuse-ml" {
+resource "aws_route_table_association" "eu-west-1a-kops-samdevopsinuse-ml" {
   route_table_id = aws_route_table.kops-samdevopsinuse-ml.id
-  subnet_id      = aws_subnet.us-west-2a-kops-samdevopsinuse-ml.id
+  subnet_id      = aws_subnet.eu-west-1a-kops-samdevopsinuse-ml.id
 }
 
 resource "aws_route_table" "kops-samdevopsinuse-ml" {
@@ -554,12 +559,12 @@ resource "aws_security_group" "nodes-kops-samdevopsinuse-ml" {
   vpc_id = aws_vpc.kops-samdevopsinuse-ml.id
 }
 
-resource "aws_subnet" "us-west-2a-kops-samdevopsinuse-ml" {
-  availability_zone = "us-west-2a"
+resource "aws_subnet" "eu-west-1a-kops-samdevopsinuse-ml" {
+  availability_zone = "eu-west-1a"
   cidr_block        = "172.20.32.0/19"
   tags = {
     "KubernetesCluster"                            = "kops.samdevopsinuse.ml"
-    "Name"                                         = "us-west-2a.kops.samdevopsinuse.ml"
+    "Name"                                         = "eu-west-1a.kops.samdevopsinuse.ml"
     "SubnetType"                                   = "Public"
     "kubernetes.io/cluster/kops.samdevopsinuse.ml" = "owned"
     "kubernetes.io/role/elb"                       = "1"
@@ -573,7 +578,7 @@ resource "aws_vpc_dhcp_options_association" "kops-samdevopsinuse-ml" {
 }
 
 resource "aws_vpc_dhcp_options" "kops-samdevopsinuse-ml" {
-  domain_name         = "us-west-2.compute.internal"
+  domain_name         = "eu-west-1.compute.internal"
   domain_name_servers = ["AmazonProvidedDNS"]
   tags = {
     "KubernetesCluster"                            = "kops.samdevopsinuse.ml"

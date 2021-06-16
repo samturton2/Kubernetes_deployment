@@ -56,3 +56,17 @@ kops create cluster \
 
 - This will take a second to run, but will produce a folder in your directory.
 ![](img/kops_folder.png)
+- The Kubernetes.tf file is made by kops, which declares a large network of aws services needed
+    - subnets
+    - roles
+    - policies
+    - ec2 instances
+    - security groups
+    - autoscaling groups
+
+--- ( note: in my case i had to manually input the aws key variables into the kubernetes.tf file, as it wasnt done automatically with kops.sh)
+
+- cd into the folder created, `terraform init` and then `terraform apply` which should create both your master and child nodes in aws.
+
+![](img/master_child_nodes.png)
+
