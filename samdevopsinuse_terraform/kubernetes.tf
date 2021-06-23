@@ -76,8 +76,8 @@ output "vpc_id" {
   value = aws_vpc.kops-samdevopsinuse-ml.id
 }
 
-variable "AWS_ACCESS_KEY" {}
 variable "AWS_SECRET_KEY" {}
+variable "AWS_ACCESS_KEY" {}
 
 provider "aws" {
   access_key = var.AWS_ACCESS_KEY
