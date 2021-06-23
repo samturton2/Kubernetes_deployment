@@ -70,3 +70,5 @@ kops create cluster \
 
 ![](img/master_child_nodes.png)
 
+- Wait for the api route53 resources are loaded 
+    - can run `kubectl api-resources` to list them if needs
