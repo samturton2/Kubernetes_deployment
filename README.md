@@ -73,7 +73,7 @@ kops create cluster \
 - Wait for the api route53 resources are loaded 
     - can run `kubectl api-resources` to list them if needs
 
-- You can then run the following to list the instances in the cluster
+- You can run the following to list the instances in the k8 cluster
 ```bash
 kubectl get nodes
 ```
