@@ -79,6 +79,7 @@ kubectl get nodes
 ```
 
 - We can now deploy nginx on our kubernetes infrastructure. This can be done easily by launching a nginx docker container
+- (I've tested this in the udemy node, provisioning user_date in the terraform file)
 
 ```bash
 # How to proceed deployment on k8s
