@@ -95,3 +95,4 @@ kubectl \
         --name=my-nginx-service
 ```
 - `kubectl get pods` will show you the running docker containers in your kubernetes cluster
+- `kubectl get pods,svc` will also show your services and the ports that are open
