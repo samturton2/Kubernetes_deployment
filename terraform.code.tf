@@ -45,6 +45,10 @@ resource "aws_instance" "UDEMY_DEVOPSINUSE" {
   provisioner "local-exec" {
      command = "echo ${aws_instance.UDEMY_DEVOPSINUSE.private_ip} >> private_ips.txt"
   }
+  user_data = <<-EOF
+      sudo apt update
+      sudo apt install nginx
+      EOF
 }
 
 
