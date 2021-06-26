@@ -94,3 +94,4 @@ kubectl \
         --type=NodePort \
         --name=my-nginx-service
 ```
+- `kubectl get pods` will show you the running docker containers in your kubernetes cluster
