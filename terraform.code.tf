@@ -43,7 +43,7 @@ resource "aws_instance" "UDEMY_DEVOPSINUSE" {
   instance_type = "t2.micro"
   key_name   = "samturton2aws"
   provisioner "local-exec" {
-     command = "echo ${aws_instance.UDEMY_DEVOPSINUSE.private_ip} >> private_ips.txt"
+     command = "echo ${aws_instance.UDEMY_DEVOPSINUSE.private_ip} > private_ips.txt"
   }
   user_data = <<-EOF
       sudo apt update
